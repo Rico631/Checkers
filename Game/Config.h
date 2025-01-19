@@ -13,6 +13,7 @@ class Config
         reload();
     }
 
+    // Обновление данных конфига
     void reload()
     {
         std::ifstream fin(project_path + "settings.json");
