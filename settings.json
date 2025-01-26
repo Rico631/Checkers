@@ -8,7 +8,7 @@
     "IsBlackBot": true, // Черными управляет бот
     "WhiteBotLevel": 0, // Уровень сложности белого бота
     "BlackBotLevel": 5, // Уровень сложности черного бота
-    "BotScoringType": "NumberAndPotential", //
+    "BotScoringType": "NumberAndPotential", // Подсчет потенциалала фигур
     "BotDelayMS": 0, // Задержка между ходами бота
     "NoRandom": false, // Наличие рандома в ходах
     "Optimization": "O1" // Уровень оптимизации ботов (урезания просчетов)

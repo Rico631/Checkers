@@ -12,7 +12,7 @@ public:
 	Hand(Board* board) : board(board)
 	{
 	}
-	// Получение координат выбранной клетки
+	// РџРѕР»СѓС‡РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ РІС‹Р±СЂР°РЅРЅРѕР№ РєР»РµС‚РєРё
 	tuple<Response, POS_T, POS_T> get_cell() const
 	{
 		SDL_Event windowEvent;
@@ -20,34 +20,34 @@ public:
 		int x = -1, y = -1;
 		int xc = -1, yc = -1;
 
-		// Ждем событие пользователя
+		// Р–РґРµРј СЃРѕР±С‹С‚РёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 		while (true)
 		{
-			// Вытягиваем событие
+			// Р’С‹С‚СЏРіРёРІР°РµРј СЃРѕР±С‹С‚РёРµ
 			if (SDL_PollEvent(&windowEvent))
 			{
 				switch (windowEvent.type)
 				{
-				case SDL_QUIT: // Закрытие окна
+				case SDL_QUIT: // Р—Р°РєСЂС‹С‚РёРµ РѕРєРЅР°
 					resp = Response::QUIT;
 					break;
-				case SDL_MOUSEBUTTONDOWN: // Клик мыши
-					// координаты
+				case SDL_MOUSEBUTTONDOWN: // РљР»РёРє РјС‹С€Рё
+					// РєРѕРѕСЂРґРёРЅР°С‚С‹
 					x = windowEvent.motion.x;
 					y = windowEvent.motion.y;
 					xc = int(y / (board->H / 10) - 1);
 					yc = int(x / (board->W / 10) - 1);
-					// Если клик был на кнопку назад
+					// Р•СЃР»Рё РєР»РёРє Р±С‹Р» РЅР° РєРЅРѕРїРєСѓ РЅР°Р·Р°Рґ
 					if (xc == -1 && yc == -1 && board->history_mtx.size() > 1)
 					{
 						resp = Response::BACK;
 					}
-					// Если клик был на кнопку перезапуск
+					// Р•СЃР»Рё РєР»РёРє Р±С‹Р» РЅР° РєРЅРѕРїРєСѓ РїРµСЂРµР·Р°РїСѓСЃРє
 					else if (xc == -1 && yc == 8)
 					{
 						resp = Response::REPLAY;
 					}
-					// Если клик был на клетку доски
+					// Р•СЃР»Рё РєР»РёРє Р±С‹Р» РЅР° РєР»РµС‚РєСѓ РґРѕСЃРєРё
 					else if (xc >= 0 && xc < 8 && yc >= 0 && yc < 8)
 					{
 						resp = Response::CELL;
@@ -58,10 +58,10 @@ public:
 						yc = -1;
 					}
 					break;
-				case SDL_WINDOWEVENT: // Изменения размера окна
+				case SDL_WINDOWEVENT: // РР·РјРµРЅРµРЅРёСЏ СЂР°Р·РјРµСЂР° РѕРєРЅР°
 					if (windowEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 					{
-						// Обновление размера доски
+						// РћР±РЅРѕРІР»РµРЅРёРµ СЂР°Р·РјРµСЂР° РґРѕСЃРєРё
 						board->reset_window_size();
 						break;
 					}
@@ -73,7 +73,7 @@ public:
 		return { resp, xc, yc };
 	}
 
-	// Ожидание действия игрока после окончания игры
+	// РћР¶РёРґР°РЅРёРµ РґРµР№СЃС‚РІРёСЏ РёРіСЂРѕРєР° РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РёРіСЂС‹
 	Response wait() const
 	{
 		SDL_Event windowEvent;
@@ -95,7 +95,7 @@ public:
 					int y = windowEvent.motion.y;
 					int xc = int(y / (board->H / 10) - 1);
 					int yc = int(x / (board->W / 10) - 1);
-					// Если нажал на кнопку перезапуска
+					// Р•СЃР»Рё РЅР°Р¶Р°Р» РЅР° РєРЅРѕРїРєСѓ РїРµСЂРµР·Р°РїСѓСЃРєР°
 					if (xc == -1 && yc == 8)
 						resp = Response::REPLAY;
 				}
